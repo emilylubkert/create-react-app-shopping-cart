@@ -39,7 +39,7 @@ const useDataApi = (initialUrl, initialData) => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await axios(url);
+        const result = await axios.get(url)
         console.log("FETCH FROM URl");
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
