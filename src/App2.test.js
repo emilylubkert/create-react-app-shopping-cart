@@ -16,25 +16,19 @@ it("renders without crashing", () => {
 
 //----- https://stackoverflow.com/questions/64101927/how-to-implement-jest-test-for-axios-and-hooks-useeffect ----
 jest.mock("axios");
-const data = {
-  name: "Bananas",
-  country: "Colombia",
-  cost: 1,
-  instock: 4,
-  id: 10,
-};
 
 afterEach(() => {
   jest.clearAllMocks();
 })
 
 test ('fetches product', async() => {
+  render(<App />)
   await act(async () => {
-    await axios.get.mockImplementationOnce(() => Promise.resolve(data));
+    await axios.get.mockImplementationOnce(() => Promise.resolve());
   });
-  await expect(axios.get).toHaveBeenCalledWith("http://localhost:1337/api/products");
+  fireEvent.click(screen.getByText('ReStock Products'))
 
-  await expect(axios.get).toHaveBeenCalledTimes(1);
+  await expect(axios.get).toHaveBeenCalledWith("http://localhost:1337/api/products");
 })
 //---------https://jestjs.io/docs/mock-functions-------
 // jest.mock("axios");
